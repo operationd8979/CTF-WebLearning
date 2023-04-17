@@ -1,0 +1,165 @@
+﻿@model IEnumerable<bigschool.Models.DetailKH>
+
+@{
+    ViewBag.Title = "demo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    #course-box {
+        border: solid 1px black;
+    }
+
+    li {
+        list-style: none;
+    }
+
+    .course {
+        list-style: none;
+    }
+
+        .course > li {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+            .course > li .date {
+                text-align: center;
+                background-color: #d41d50;
+                color: white;
+                width: 60px;
+                border-radius: 8px;
+            }
+
+            .course > li .details {
+                position: absolute;
+                top: 0;
+                left: 70px;
+            }
+</style>
+
+
+<div class="wrapper">
+    <div class="row flex-xl-nowrap">
+        <!--NAV DRAWER, HEADER_RIGHT-->
+        <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+            <div class="nav-drawer-content">
+                <div class="list-group-1">
+                    <a href="/Home/Index"><i class="fa-solid fa-house"></i></a>
+                    <a href="/Courses/Processing"><i class="fa-solid fa-user"></i></a>
+                    <a href="/Courses/Follower"><i class="fa-solid fa-users"></i></a>
+                </div>
+                <div class="list-group-2">
+                    <ul class="list-group list-group-flush">
+                        @for (int i = 0; i < Model.Count(); i++)
+                        {
+                            <a class="nav-link list-group-item" href="/Courses/demo/?id=@Model.ElementAt(i).Id">Bài giảng thứ @Model.ElementAt(i).Id</a>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!--MAIN-->
+        <div class="container col-12 col-md-9 col-xl-9 py-md-3 pl-md-5 bd-content" role="main">
+            <div class="row">
+                <!--TITLE-->
+                <div class="title-1 col-md-10 offset-md-1 col-12">
+                    <h2 class="labs font-weight-bold font-primary">Bài giảng @bigschool.Models.DetailKH.findById(ViewBag.id).Id</h2>
+                    <div class="next-intro">
+                        <a href="/Challenge">Bắt đầu thử thách <i class="fa-solid fa-arrow-right-long"></i></a>
+                    </div>
+                </div>
+                <!--COURSE-->
+                <div class="content-1 col-md-10 offset-md-1 col-12">
+                    <div class="row">
+                        <div class="col col-4">
+                            <span class="cursorPointer"><img src="~/Content/theme/imgs/sqlInjection.png" atl="SqlInjecton" /></span>
+                        </div>
+                        <div class="col col-4">
+                            <span class="cursorPointer"><img src="~/Content/theme/imgs/networkingIntro.png" atl="NetWorkingIntro" /></span>
+                        </div>
+                        <div class="col col-4">
+                            <span class="cursorPointer"><img src="~/Content/theme/imgs/linuxFund.png" atl="LinuxFund" /></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--ITEM COURSE-->
+            <div class="row">
+                <div class="content-1 col-md-10 offset-md-1 col-12">
+                    <div class="card-body row">
+                        <iframe width="560" height="315" src="@bigschool.Models.DetailKH.findById(ViewBag.id).Link" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .menu-item {
+        background-color: white;
+    }
+
+    .dropbtn {
+        background-color: #04AA6D;
+        color: white;
+        padding: 13px;
+        font-size: 13px;
+        border: none;
+    }
+
+    .menu {
+        position: relative;
+        display: inline-block;
+        transition: ease 2s;
+        margin-left: 40px;
+    }
+
+    .menu-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        .menu-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+            .menu-content a:hover {
+                background-color: #ddd;
+                border: solid 1px black;
+            }
+
+    .menu:hover .menu-content {
+        display: block;
+    }
+
+    .menu:hover .dropbtn {
+        background-color: #3e8e41;
+    }
+</style>
+
+
+
+
+
+@section scripts
+    {
+    <script>
+        $(document).ready(function () {
+            $(".js-tongle-attendance").click(function (e) {
+                alert("OK!");
+            });
+        });
+    </script>
+}
+

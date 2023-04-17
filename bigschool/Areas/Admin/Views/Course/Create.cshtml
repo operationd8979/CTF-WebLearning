@@ -1,0 +1,139 @@
+﻿@model bigschool.Models.Course
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Tạo khóa học mới</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <!--
+            <div class="form-group">
+                <label for="fname">Name:</label><br>
+                <input type="text" id="Name" name="Name" value="" class="form-control" required><br>
+            </div>
+        -->
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Place, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Place, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Place, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Pic, "Hình", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Pic, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Pic, "", new { @class = "text-danger" })
+                <input type="file" name="fileUpload" id="fileUpload" style="display:none;" />
+                <input type="button" id="btnUpload" value="Chọn" class="btn btn-success" style="margin-top:5px" />
+            </div>
+        </div>
+        <br>
+
+
+
+        <div class="form-group">
+            <label for="fname">Date:</label><br>
+            <input type="date" id="date" name="date" value="John" required><br>
+        </div>
+
+        <div class="form-group">
+            <label for="lname">Time:</label><br>
+            <input type="time" id="time" name="time" value="Doe" required><br><br>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CategoryId, "CategoryId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("CategoryId", new SelectList(Model.ListCategory, "Id", "Name"), htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="currency-field" class="control-label col-md-2">Enter Amount</label>
+            <div class="col-md-10">
+                <input type="text" name="Fee" id="Fee" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$1,000">
+            </div>
+        </div>
+        <br>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default btn-dark" />
+            </div>
+        </div>
+    </div>
+}
+
+<br />
+<hr />
+<div class="col-xl-6">
+    <img src="~/Content/theme/imgs/course0.jpg" id="img-avatar" style="box-shadow: 5px 5px 5px 5px;" />
+</div>
+
+
+<br />
+<hr />
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+@section upload
+{
+    <script>
+        $(function () {
+            $('#btnUpload').click(function () {
+                $('#fileUpload').trigger('click');
+            });
+        });
+        $('#fileUpload').change(function () {
+            if (window.FormData !== undefined) {
+                var fileUpload = $('#fileUpload').get(0);
+                var files = fileUpload.files;
+                var formData = new FormData();
+                formData.append('file', files[0]);
+                $.ajax(
+                    {
+                        type: 'POST',
+                        url: '/Course/ProcessUpload',
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        success: function (urlImage) {
+                            $('#pictureUpload').attr('src', urlImage);
+                            $('#Pic').val(urlImage);
+                            document.getElementById("img-avatar").src = urlImage;
+                        },
+                        error: function (err) {
+                            alert('Error ', err.statusText);
+                        }
+                    });
+            }
+        });
+    </script>
+}

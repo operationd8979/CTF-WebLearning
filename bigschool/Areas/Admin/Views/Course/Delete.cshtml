@@ -1,0 +1,64 @@
+﻿@model bigschool.Models.Course
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Môn học:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.Name)
+        </dd>
+
+        <dt>
+            Tên khóa học:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LecturerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LecturerId)
+        </dd>
+
+        <dt>
+            Địa điểm:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Place)
+        </dd>
+
+        <dt>
+            Ngày bắt đầu:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateTime)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default btn-dark" onclick="return confirm('Bạn có chắc muốn xóa khóa học này?')" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

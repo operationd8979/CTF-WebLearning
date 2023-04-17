@@ -1,0 +1,156 @@
+﻿
+
+@using PagedList.Mvc;
+@model PagedList.IPagedList<bigschool.Models.Challenge>
+
+@{
+    ViewBag.Title = "Challenges";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-challenge mt-5">
+    <!--Search form-->
+    <form id="search-challenge" action="" method="get">
+        <!--
+        <div style="display: flex">
+            <div class="input-challenge-gr input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01" style="background-color: #1E87F0; color: #FBF9F6;border:none">Category</label>
+                </div>
+                <select class="custom-select" id="inputGroupSelect01">
+                    <option selected>Choose...</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+            <div class="input-challenge-gr input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Following</label>
+                </div>
+                <select class="custom-select" id="inputGroupSelect01">
+                    <option value="1" selected>All</option>
+                    <option value="2">Followed</option>
+                </select>
+            </div>
+            <div class="input-challenge-gr input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Solved</label>
+                </div>
+                <select class="custom-select" id="inputGroupSelect01">
+                    <option value="1" selected>unsolved</option>
+                    <option value="2">solved</option>
+                    <option value="3">All</option>
+                </select>
+            </div>
+            <div class="input-challenge-gr input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01" style="background-color: #1E87F0; color: #FBF9F6;border:none">Order</label>
+                </div>
+                <select class="custom-select" id="inputGroupSelect01">
+                    <option value="1" selected>Newest</option>
+                    <option value="2">Most Solves</option>
+                    <option value="3">Highest Score</option>
+                </select>
+            </div>
+        </div>
+        -->
+        <div class="input-group input-group-style-2 mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default" style="background-color: #1E87F0; color: #FBF9F6;border: none">Search(Name or Author)</span>
+            </div>
+            @using (Html.BeginForm("Index", "Challenge", FormMethod.Get, new { @class = "form-inline" }))
+            {
+                <input type="text" class="form-control" value="@ViewBag.searchString"
+                    name="searchString" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Nhập tên challenge">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            }
+            </div>
+    </form>
+
+    <!--Card challenge collect-->
+    <div class="row row-cols-1 row-cols-lg-2 mt-4">
+        <!--card 0-->
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+            <div class="col mb-5 flex-column">
+                <a href="/Challenge/Detail/@Model.ElementAt(i).Id" class="d-block" style="text-decoration: none">
+                    <div class="card challenge-card">
+                        <div class="card-header d-flex">
+                            <span>@Model.ElementAt(i).Name</span>
+                            <div class="ml-auto">
+                                <span class="badge bg-success bd-white">@ViewBag.users[i].Text</span>
+                            </div>
+                        </div>
+                        <div class="card-challenge-body  font-secondary d-flex row py-3">
+                            <div style="margin-left: 30px">
+                                <span style="margin-right: 40px"><i style="margin-right: 10px" class="fas fa-fire-alt mr-2" aria-hidden="true"></i><span class="font-weight-bolder">@Model.ElementAt(i).PointGet</span> points</span>
+                                <!--<span style="margin-right: 40px"><i style="margin-right: 10px" class="far fa-comments mr-2" aria-hidden="true"></i><span class="font-weight-bolder">372</span> comments </span>-->
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex">
+                            <div class="mr-auto">
+                                <span class="badge bg-transparent" id="category-display">@Model.ElementAt(i).TimePost.ToString("dd/MM/yyyy")</span>
+                                <span class="badge bg-transparent">
+                                    <span style="color: white; " class="">
+                                        intelagent
+                                        <span class="ctf-pointer" data-toggle="tooltip" data-placement="top" title="" onclick="window.location.href='/learn++'" data-original-title="CTFlearn Premium"><i class="premium far fa-gem" aria-hidden="true"></i></span>
+                                    </span>
+
+                                </span>
+                            </div>
+                            <span class="d-inline font-secondary">Web Security</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+        <div class="MenuTrang">
+            <span class="btn-pre">Previous</span>
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+            <span class="btn-next">Next</span>
+        </div>
+    </div>
+
+    <style>
+        .MenuTrang li {
+            display: inline;
+        }
+    </style>
+    <style type="text/css">
+        #mau-nut a {
+            clear: both;
+            background-color: orange;
+            color: snow;
+        }
+
+            #mau-nut a:hover {
+                background-color: darkcyan;
+                color: snow;
+            }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var maxLength = 100;
+            $(".show-read-more").each(function () {
+                var myStr = $(this).text();
+                if ($.trim(myStr).length > maxLength) {
+                    var newStr = myStr.substring(0, maxLength);
+                    var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
+                    $(this).empty().html(newStr);
+                    $(this).append('<a href="javascript:void(0);" class="read-more">đọctiếp...</a > ');
+                    $(this).append('<span class="more-text">' + removedStr + '</span>');
+                }
+            });
+            $(".read-more").click(function () {
+                $(this).siblings(".more-text").contents().unwrap();
+                $(this).remove();
+            });
+        });
+    </script>
+    <style>
+        .show-read-more .more-text {
+            display: none;
+        }
+    </style>

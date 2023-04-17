@@ -1,0 +1,336 @@
+﻿:root {
+    --primary-color: #131316;
+    --secondary-color: #9fef00;
+    --secondary-dark-color: #a4b1cd;
+    --white-color: #fff;
+    --white-color-2: #f9f9f9;
+    --border-color: #383838;
+    --border-color-2: #4caf50;
+    --error-color: #ff3e3e;
+}
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Tahoma, Verdana, sans-serif;
+}
+body {
+    background-color: var(--primary-color)!important;
+    color: var(--white-color-2);
+}
+.nav-bar {
+    background-color: var(--primary-color);       
+    padding: 0.5rem 4rem!important;
+    border-bottom: 1px solid var(--border-color);    
+    display: flex;
+    justify-content: space-between;
+}
+.nav-bar .collapse{
+    justify-content: flex-end;
+}
+.nav-bar .collapse ul{
+    align-items: center;
+}
+.nav-bar .collapse ul li{
+    margin-left: 30px;
+}
+.nav-bar .collapse ul li.dropleft a img {
+    border: 4px solid var(--white-color-2);
+    border-radius: 100%;
+}
+.nav-bar .collapse ul li a{
+    font-weight: 600;
+    color: #fff;
+}
+.nav-bar .collapse ul li a.btn-learn{
+    border: 2px solid var(--secondary-color);
+    border-radius: 10px;
+    background-color: transparent;
+}
+.nav-bar .collapse ul li a.btn-learn:hover{
+    border: 2px solid var(--border-color-2);
+    border-radius: 10px;
+    background-color: var(--border-color-2);
+    color: var(--white-color)!important;
+}
+.nav-bar .collapse ul li .nav-link i{
+    margin-right: 10px;
+}
+.nav-bar .collapse ul li:hover a.nav-link {
+    color: var(--secondary-color);
+}
+.nav-bar .collapse ul li.icon-bell{
+    font-size: 30px;
+}
+.nav-bar .collapse ul li:hover .dropdown-menu{
+    display: block;
+}
+.nav-bar .collapse ul li .dropdown-menu .dropdown-item{
+    color: var(--primary-color);
+    font-weight: 300;
+}
+.nav-bar .collapse ul li .dropdown-menu .dropdown-item i{
+    margin-right: 12px;
+}
+.nav-bar .collapse ul li .dropdown-menu .dropdown-item:hover{
+    color: var(--border-color-2);
+}
+.dropleft .dropdown-menu{
+    right:50px;
+}
+.form-inline{
+    width: 280px;
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+.form-control {
+    width: 100%;
+    background-image: url(imgs/search.png);
+    background-repeat: no-repeat;
+    background-position: center right;
+    height: 40px;
+    line-height: 40px;
+}
+.form-control:focus{
+    background-image: none;
+}
+.nav-drawer-content .list-group-1 {
+    display: block;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+}
+.nav-drawer-content .list-group-1 a {
+    width: 50px;
+    height: 50px;
+    display: inline-block;  
+    margin-right: 10px;
+}
+.nav-drawer-content .list-group-1 a i{
+    font-size: 24px;
+    margin: 10px 10px 10px 10px;
+    color: var(--white-color-2);
+}
+.nav-drawer-content .list-group-2{
+    margin-top: 10px;
+}
+.nav-drawer-content .list-group-2 .list-group .list-group-item {
+    background-color: transparent;
+    color: white;
+    line-height: 2;
+}
+.nav-drawer-content .list-group-2 .list-group .list-group-item i{
+    margin-right: 30px;
+}
+.title-1{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.title-1 .next-intro a{
+    text-decoration: none;
+    color: var(--white-color-2);
+    margin-bottom: 0;
+    font-size: 14px;
+}
+.title-1 h2{
+    color: var(--white-color-2);
+}
+.cursorPointer img{
+    width: 240px;
+    margin-right: 30px;
+}
+.container .content-1{
+    margin-top: 30px;
+}
+.card-body{
+    background-color: var(--white-color-2);
+    border-radius: 8px;
+    padding: 20px 10px 20px 10px!important;
+    margin-bottom: 30px;
+}
+
+/*Update login css*/
+.main-login {
+    margin: 80px 80px;
+}
+
+.bg-login {
+    width: 70%;
+}
+
+h2#title {
+    font-size: 56px;
+}
+
+#loginForm form .row {
+    display: block;
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+
+#loginForm form input {
+    max-width: 400px;
+}
+
+    #loginForm form input.btn-submit {
+        background-color: var(--secondary-color);
+        width: 400px;
+        font-weight: 600;
+    }
+
+#loginForm form p a {
+    margin-right: 70px;
+    text-decoration: none;
+}
+
+/*Update register css*/
+.btn-submit-re {
+    background-color: var(--secondary-color);
+    width: 400px;
+    font-weight: 600;
+}
+
+#registerForm form .row {
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+
+/*Update challenges css*/
+.content-challenge {
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+    .content-challenge .input-group-prepend {
+        width: 100px;
+    }
+
+        .content-challenge .input-group-prepend .input-group-text {
+            border-radius: 4px 0 0 4px;
+            height: 40px;
+        }
+
+    .content-challenge .input-challenge-gr select {
+        width: 150px;
+        border-color: #ced4da;
+        border-radius: 0 4px 4px 0;
+    }
+
+#search-challenge {
+    display: block;
+}
+
+    #search-challenge .input-challenge-gr {
+        margin-right: 20px;
+    }
+
+.content-challenge .input-group-style-2 .input-group-prepend {
+    width: 200px;
+}
+
+.content-challenge .input-group-style-2 .form-control {
+    max-width: 594px;
+}
+
+.content-challenge .input-group-style-2 button {
+    margin-left: 20px !important;
+    width: 254px;
+    border: 2px solid var(--secondary-color);
+    border-radius: 4px !important;
+    font-weight: 600;
+    color: var(--white-color-2);
+}
+
+.challenge-card {
+    background-color: #343a40 !important;
+    color: var(--white-color-2);
+}
+
+    .challenge-card .card-header, .card-footer {
+        justify-content: space-between;
+    }
+
+    .challenge-card .card-challenge-body {
+        width: 100%;
+        margin: 10px 0 10px 0;
+    }
+
+/*Css đánh số trang*/
+.MenuTrang {
+    display: flex;
+}
+
+    .MenuTrang .pagination-container ul li, .btn-pre, .btn-next {
+        width: 30px;
+        height: 40px;
+        background-color: var(--white-color-2);
+        color: black;
+        border: 1px solid #eaeaea;
+        display: flex;
+        align-items: center;
+    }
+
+        .MenuTrang .pagination-container ul li a {
+            margin: 10px;
+        }
+
+.btn-pre {
+    width: 100px;
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 4px 0 0 4px;
+}
+
+.btn-next {
+    width: 80px;
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 0 4px 4px 0;
+}
+
+.PagedList-skipToNext {
+    display: none !important;
+}
+
+/*Detail challenge css*/
+.bg-dark-card {
+    background-color: #343a40;
+}
+
+.bd-b {
+    border-bottom: 1px solid #131316;
+    border-radius: 0;
+}
+
+.card-challege {
+    border: 1px solid var(--border-color);
+}
+
+.card a {
+    text-decoration: none !important;
+    color: white;
+}
+
+#comment-1 form textarea {
+    max-width: 900px;
+    height: 100px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/*Css create challenge*/
+.txtName, .txtFlag {
+    max-width: 417px;
+    width: 417px;
+}
+
+.input-st-2 {
+    width: 100%;
+}
+
+.btn-back a {
+    text-decoration: none;
+    color: white;
+}

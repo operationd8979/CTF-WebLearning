@@ -1,0 +1,175 @@
+﻿@model IEnumerable<bigschool.Models.Course>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #course-box {
+        border: solid 1px black;
+    }
+
+    li {
+        list-style: none;
+    }
+
+    .course {
+        list-style: none;
+    }
+
+        .course > li {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+            .course > li .date {
+                text-align: center;
+                background-color: #d41d50;
+                color: white;
+                width: 60px;
+                border-radius: 8px;
+            }
+
+            .course > li .details {
+                position: absolute;
+                top: 0;
+                left: 70px;
+            }
+</style>
+
+@using (Html.BeginForm("Processing", "Course", FormMethod.Get, new { @class = "form-inline" }))
+{
+    <h2>Các khóa học hiện tại</h2>
+
+    <div class="form-group form-inline" style="display: flex;">
+        <input type="Text" class="form-control col-md-10" value="@ViewBag.searchString"
+               name="searchString" placeholder="Nhập tên khóa học">
+        <input type="submit" class="btn btn-info" value="Tìm khóa học" style="margin-left:10px;">
+        <div class="dropdown">
+            <select id="" name="tileCategory" style="width:200px; height:38px; margin-left:20px;">
+                <option value="-1"> NONE</option>
+                @foreach (var item in @ViewBag.ListCategory)
+                {
+                    if (item.Value == @ViewBag.tileCategory)
+                    {
+                        <option value=@item.Value selected="selected">@item.Text</option>
+                    }
+                    else
+                    {
+                        <option value=@item.Value>@item.Text</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="menu">
+            <button class="dropbtn" type="button" onclick="location.href='?tileCategory=-1';">Loại Category</button>
+            <div class="menu-content">
+                @foreach (var item in @ViewBag.ListCategory)
+                {
+                    <div class="menu-item"><a href="/Course/Processing/?tileCategory=@item.Value">@item.Text</a></div>
+                }
+            </div>
+        </div>
+
+    </div>
+    <br>
+}
+
+<style>
+    .menu-item {
+        background-color: white;
+    }
+
+    .dropbtn {
+        background-color: #04AA6D;
+        color: white;
+        padding: 13px;
+        font-size: 13px;
+        border: none;
+    }
+
+    .menu {
+        position: relative;
+        display: inline-block;
+        transition: ease 2s;
+        margin-left: 40px;
+    }
+
+    .menu-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        .menu-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+            .menu-content a:hover {
+                background-color: #ddd;
+                border: solid 1px black;
+            }
+
+    .menu:hover .menu-content {
+        display: block;
+    }
+
+    .menu:hover .dropbtn {
+        background-color: #3e8e41;
+    }
+</style>
+
+
+<div class="row">
+    <ul class="course">
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+            <hr />
+            <li>
+                <div class="date">
+                    <div class="month">
+                        @Model.ElementAt(i).DateTime.ToString("MM")/@Model.ElementAt(i).DateTime.ToString("dd")
+                    </div>
+                    <div class="day">
+                        @Model.ElementAt(i).DateTime.ToString("yyyy")
+                    </div>
+                </div>
+                <div class="details">
+                    <span class="lecture" style="font-weight:bold">
+                        [@Model.ElementAt(i).Name]
+                    </span>
+                    <span class="lecture">
+                        -@ViewBag.user[i].Text-
+                    </span>
+                    <span class="category">
+                        -@Model.ElementAt(i).Category.Name-
+                    </span>
+                    <span class="fee">
+                        -@Model.ElementAt(i).Fee.ToString("C3")-
+                    </span>
+                    <span class="place">
+                        -@Model.ElementAt(i).Place-
+                    </span>
+                    <span>
+                        @if (ViewBag.LoginUser != null)
+                        {
+                            <button data-course-id="@Model.ElementAt(i).Id" class="btn btn-default btn-sm js-tongle-attendance going2">Going?</button>
+                        }
+                    </span>
+
+                </div>
+            </li>
+
+        }
+
+    </ul>
+</div>
+
+

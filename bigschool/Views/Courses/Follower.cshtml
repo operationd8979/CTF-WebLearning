@@ -1,0 +1,249 @@
+﻿@model IEnumerable<bigschool.Models.Course>
+
+@{
+    ViewBag.Title = "Follower";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    #course-box {
+        border: solid 1px black;
+    }
+
+    li {
+        list-style: none;
+    }
+
+    .course {
+        list-style: none;
+    }
+
+        .course > li {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+            .course > li .date {
+                text-align: center;
+                background-color: #d41d50;
+                color: white;
+                width: 60px;
+                border-radius: 8px;
+            }
+
+            .course > li .details {
+                position: absolute;
+                top: 0;
+                left: 70px;
+            }
+</style>
+
+
+<div class="wrapper">
+    <div class="row flex-xl-nowrap">
+        <!--NAV DRAWER, HEADER_RIGHT-->
+        <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+            <div class="nav-drawer-content">
+                <div class="list-group-1">
+                    <a href="/Home/Index"><i class="fa-solid fa-house"></i></a>
+                    <a href="/Courses/Processing"><i class="fa-solid fa-user"></i></a>
+                    <a href="/Courses/Follower"><i class="fa-solid fa-users"></i></a>
+                </div>
+                <div class="list-group-2">
+                    <ul class="list-group list-group-flush">
+                        @foreach (var item in @ViewBag.ListCategory)
+                        {
+                            <a class="nav-link list-group-item" href="/Courses/Follower/?tileCategory=@item.Value">@item.Text</a>
+
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!--MAIN-->
+        <div class="container col-12 col-md-9 col-xl-9 py-md-3 pl-md-5 bd-content" role="main">
+
+            <div class="row">
+                <!--TITLE-->
+                <div class="title-1 col-md-10 offset-md-1 col-12">
+                    <h2 class="labs font-weight-bold font-primary">Giảng viên đã theo dõi!</h2>
+                    <div class="next-intro">
+                        <a href="/Challenge">Bắt đầu thử thách <i class="fa-solid fa-arrow-right-long"></i></a>
+                    </div>
+                </div>
+                <div class="title-1 col-md-10 offset-md-1 col-12">
+                    @using (Html.BeginForm("Follower", "Courses", FormMethod.Get, new { @class = "form-inline" }))
+                    {
+                        <div class="form-group form-inline" style="display: flex;">
+                            <input type="Text" class="form-control col-md-10" value="@ViewBag.searchString"
+                                   name="searchString" placeholder="Nhập tên khóa học">
+                            <input type="submit" class="btn btn-info" value="Tìm khóa học" style="margin-left:10px;">
+                            <div class="dropdown">
+                                <select id="" name="tileCategory" style="width:200px; height:38px; margin-left:20px;">
+                                    <option value="-1"> NONE</option>
+                                    @foreach (var item in @ViewBag.ListCategory)
+                                    {
+                                        if (item.Value == @ViewBag.tileCategory)
+                                        {
+                                            <option value=@item.Value selected="selected">@item.Text</option>
+                                        }
+                                        else
+                                        {
+                                            <option value=@item.Value>@item.Text</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                    }
+                </div>
+                <!--COURSE-->
+                <div class="content-1 col-md-10 offset-md-1 col-12">
+                    <div class="row">
+                        <div class="col col-4">
+                            <span class="cursorPointer"><img src="~/Content/theme/imgs/01.png" atl="SqlInjecton" /></span>
+                        </div>
+                        <div class="col col-4">
+                            <span class="cursorPointer"><img src="~/Content/theme/imgs/02.png" atl="NetWorkingIntro" /></span>
+                        </div>
+                        <div class="col col-4">
+                            <span class="cursorPointer"><img src="~/Content/theme/imgs/01.png" atl="LinuxFund" /></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--ITEM COURSE-->
+            <div class="row">
+                <div class="content-1 col-md-10 offset-md-1 col-12">
+                    @for (int i = 0; i < Model.Count(); i++)
+                    {
+                        if (Model.ElementAt(i).LecturerId == ViewBag.LoginUser)
+                        {
+                            continue;
+                        }
+                        <div class="card-body row">
+                            <div class="col-6 d-flex">
+                                <div class="lab-image my-auto">
+                                    <img class="card-img-top rounded" src="@Model.ElementAt(i).Pic" alt="Card image cap">
+                                </div>
+                            </div>
+                            <div class="col-6 d-flex flex-column">
+                                <h4 class="text-dark font-primary font-weight-bolder">@Model.ElementAt(i).Name</h4>
+                                <p class="text-black-50 font-secondary">This lab aims to teach the very basics of SQL and SQL injections. This is the first lab created by CTFlearn.<br />@Model.ElementAt(i).DateTime.ToString("dd/MM/yyyy")----------<b>@Model.ElementAt(i).Fee.ToString("C3")</b></p>
+                                <div class="d-flex mt-auto" style="justify-content:space-between">
+                                    <p class="text-black-50 font-weight-bolder mt-auto mb-0 mr-4">
+                                        @if (ViewBag.LoginUser != null)
+                                        {
+                                            <button data-user-id="@Model.ElementAt(i).LecturerId" class="btn btn-default btn-sm js-tongle-follow going2"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Gv:@ViewBag.user[i].Text</button>
+                                        }
+                                    </p>
+                                    <p class="text-black-50 font-weight-bolder mt-auto mb-0">
+                                        @if (ViewBag.LoginUser != null)
+                                        {
+                                            if (@Model.ElementAt(i).isShowGoing)
+                                            {
+                                                <button data-course-id="@Model.ElementAt(i).Id" class="btn btn-default btn-sm js-tongle-attendance going2"><i class="mr-1 fas fa-tachometer-alt" aria-hidden="true"></i> Going</button>
+                                            }
+                                            else
+                                            {
+                                                <button data-course-id="@Model.ElementAt(i).Id" class="btn btn-default btn-sm js-tongle-attendance going"><i class="mr-1 fas fa-tachometer-alt" aria-hidden="true"></i> Going?</button>
+                                            }
+                                        }
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .menu-item {
+        background-color: white;
+    }
+
+    .dropbtn {
+        background-color: #04AA6D;
+        color: white;
+        padding: 13px;
+        font-size: 13px;
+        border: none;
+    }
+
+    .menu {
+        position: relative;
+        display: inline-block;
+        transition: ease 2s;
+        margin-left: 40px;
+    }
+
+    .menu-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        .menu-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+            .menu-content a:hover {
+                background-color: #ddd;
+                border: solid 1px black;
+            }
+
+    .menu:hover .menu-content {
+        display: block;
+    }
+
+    .menu:hover .dropbtn {
+        background-color: #3e8e41;
+    }
+</style>
+
+
+
+
+@section scripts
+    {
+    <script>
+        $(document).ready(function () {
+            $(".js-tongle-attendance").click(function (e) {
+                var button = $(e.target);
+                $.post("/api/attendances", { Id: button.attr("data-course-id") })
+                    .done(function () {
+                        alert("Đăng ký khóa học thành công!");
+                        button.removeClass("btn-default going");
+                        button.addClass("btn-info going2");
+                        button.text("Going");
+                    }).fail(function () {
+                        alert("Bạn không thể tự hủy đăng ký khóa học!");
+                    });
+            });
+            $(".js-tongle-follow").click(function (e) {
+                var button = $(e.target);
+                $.post("/api/followings", { FolloweeId: button.attr("data-user-id") })
+                    .done(function () {
+                        button.removeClass("going");
+                        button.addClass("btn-success going2");
+                        button.text("Followed");
+                        location.reload();
+                    }).fail(function () {
+                        alert("Something fail");
+                    });
+            });
+        });
+    </script>
+}
+

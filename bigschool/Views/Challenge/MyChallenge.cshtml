@@ -1,0 +1,60 @@
+﻿@model IEnumerable<bigschool.Models.Challenge>
+
+@{
+    ViewBag.Title = "MyChallenge";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="new" style="color:black">
+    <h1 class="mt-4" style="color:white">Challenge của bạn</h1>
+    <div class="card mb-4">
+        <div class="card-body">
+            Các thử thách bạn đã tạo bên dưới sắp xếp theo thời gian. Hôm nay @ViewBag.Time.ToString("dd/MM/yyyy").
+        </div>
+    </div>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            DataTable Example
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple">
+                <thead>
+                    <tr>
+                        <th>Tên thử thách</th>
+                        <th>Điểm thưởng</th>
+                        <th>Ngày tạo</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Tên thử thách</th>
+                        <th>Điểm thưởng</th>
+                        <th>Ngày tạo</th>
+                        <th>Hành động</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @for (int i = 0; i < Model.Count(); i++)
+                    {
+                        <tr>
+                            <th>@Model.ElementAt(i).Name</th>
+                            <th>@Model.ElementAt(i).PointGet</th>
+                            <th>@Model.ElementAt(i).TimePost.ToString("dd/MM/yyyy")</th>
+                            <th>
+                                @Html.ActionLink("Delete", "Delete", new { id = Model.ElementAt(i).Id })
+                                @Html.ActionLink("Edit", "Edit", new { id = Model.ElementAt(i).Id })
+                            </th>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,77 @@
+﻿@model bigschool.Models.Challenge
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="col-lg-6">
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal" style="padding: 20px 150px 20px 150px;">
+                <h2>Tạo challenge</h2>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2 mt-3" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control txtName" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="lname" class="mt-3">Mô tả:</label><br>
+                    <textarea id="Des" name="Des" value="" required cols="50" rows="10" style="height: 100px; max-width: 500px; border-radius:4px"></textarea>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.flag, htmlAttributes: new { @class = "control-label col-md-2 mt-3" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.flag, new { htmlAttributes = new { @class = "form-control txtFlag" } })
+                        @Html.ValidationMessageFor(model => model.flag, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="fname" class="mt-3">Date:</label><br>
+                    <input type="date" id="date" name="date" value="John" required class="input-st-2">
+                </div>
+
+                <div class="form-group">
+                    <label for="lname" class="mt-3">Time:</label><br>
+                    <input type="time" id="time" name="time" value="Doe" required class="input-st-2">
+                </div>
+                <div class="form-group">
+                    <label for="currency-field" class="control-label mt-3">Enter Point</label>
+                    <div class="col-md-10">
+                        <input type="number" name="PointGet" id="PointGet" value="" data-type="currency" placeholder="Point 10.00" class="input-st-2">
+                    </div>
+                </div>
+                <br>
+                <div style="display:flex; align-items:center">
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="btn btn-default btn-primary" style="margin-right: 20px" />
+                        </div>
+                    </div>
+                    <div class="btn btn-default btn-dark btn-back">
+                        @Html.ActionLink("Back to List", "Index")
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <img src="~/Content/theme/imgs/bg-create.png" alt="" style="max-width:700px;width:700px;margin-top:200px;" />
+        </div>
+    </div>
+
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

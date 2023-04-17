@@ -1,0 +1,103 @@
+﻿@using Microsoft.AspNet.Identity
+
+
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+
+<ul class="navbar-nav navbar-right">
+    <li>
+        @Html.ActionLink("Xin chào " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "nav-link" })
+    </li>
+    <li>
+        <div class="dropdown">
+            <button type="button" class="dropbtn"><i class="fa-sharp fa-solid fa-chevron-down"></i></button>
+            <div class="dropdown-content">
+                @Html.ActionLink("Tạo khóa học mới", "Create", "Courses", routeValues: null, htmlAttributes: new { title = "Roll", @class = "nav-link" })
+                @Html.ActionLink("Khóa học đang theo", "Processing", "Courses", routeValues: null, htmlAttributes: new { title = "Roll", @class = "nav-link" })
+                @Html.ActionLink("Khóa học đang dạy", "Teaching", "Courses", routeValues: null, htmlAttributes: new { title = "Roll", @class = "nav-link" })
+                @Html.ActionLink("Following", "Follower", "Courses", routeValues: null, htmlAttributes: new { title = "Roll", @class = "nav-link" })
+                @Html.ActionLink("Trang Admin", "Index", "Dashboard", new { Area = "Admin" }, htmlAttributes: new { title = "Roll", @class = "nav-link" })
+                <a href="#">......</a>
+            </div>
+    </div>
+    </li>
+    <li><a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()" onclick="return confirm('Bạn có chắc muốn đăng xuất?')">Log off</a></li>
+</ul>
+
+    }
+}
+else
+{
+    <ul class="navbar-nav navbar-right">
+        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link" })</li>
+    </ul>
+}
+
+
+<style>
+    /* Dropdown Button */
+    .dropbtn {
+        background-color: black;
+        color: white;
+        padding: 10px;
+        font-size: 10px;
+        border: none;
+    }
+
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        /* Links inside the dropdown */
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+            /* Change color of dropdown links on hover */
+            .dropdown-content a:hover {
+                background-color: #ddd;
+            }
+
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    /* Change the background color of the dropdown button when the dropdown content is shown */
+    .dropdown:hover .dropbtn {
+        background-color: #3e8e41;
+    }
+
+    .navbar-inverse {
+        background-color: #d41d50;
+        border-color: #fbf6f6;
+    }
+
+        .navbar-inverse .navbar-nav > li > a {
+            color: white;
+        }
+
+        .navbar-inverse .navbar-brand {
+            color: white;
+        }
+</style>

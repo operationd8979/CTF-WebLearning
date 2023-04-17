@@ -1,0 +1,228 @@
+﻿@model bigschool.Models.Challenge
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="mt-5">
+    <div class="row">
+        <div class="col-lg-7 col-md-12 mb-4">
+            <div class="h-100">
+                <div class="card card-challege h-100 bg-dark-card">
+                    <div class="card-header d-flex bd-b">
+                        <span id="title-display"> @Model.Name </span>
+                        <div style="margin-left: auto;">
+                            <span style="margin-right:30px;">
+                                <i class="fa-solid fa-fire" style="margin-right:10px"></i>
+                                <span id="point-display">@Model.PointGet</span>
+                                <span>point</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body d-flex flex-column align-content-end bg-dark-card bd-b mb-0">
+                        <div class="row d-flex">
+                            <div class="col-12">
+                                <div id="desciption-display">
+                                    <p>
+                                        @Model.Des
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row d-flex flex-fill align-items-end">
+                            <div class="col-12">
+                                <div class="form-row align-items-center mt-5 align-items-end d-flex">
+                                    <div class="col-9">
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text" style="height:40px; border-radius:4px 0 0 4px">Flag</div>
+                                            </div>
+                                            <input class="form-control" id="flag" type="text" name="flag" placeholder="CTFLearn" />
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <button data-course-id="@Model.Id" class="btn btn-default btn-sm js-tongle-attendance going"><i class="mr-1 fas fa-tachometer-alt" aria-hidden="true"></i> Submit?</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex bg-dark-card">
+                        <div style="margin-right:auto">
+                            <span class="badge bg-transparent" id="category-display">Web</span>
+                            " . "
+                            <span class="badge bg-transparent">
+                                <a href="#">intelagent</a>
+                                <i class="fa-regular fa-gem"></i>
+                            </span>
+
+                        </div>
+                        <span class="d-inline">234324 solves</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5 col-md-12">
+            <div class="flex-lg-column">
+                <div class="card flex-lg-fill mb-4 bg-dark-card">
+                    <div class="card-header bg-dark-card bd-b"><span><i class="fa-solid fa-crown"></i> Top 4</span></div>
+                    <div class="card-body bg-dark-card bd-b">
+                        <!--Danh sach top 10-->
+                        <div class="flex-fill">
+                            <div class="m-1 align-items-center" style="display:flex; flex-wrap:nowrap">
+                                <span class="text-white-50 p-1 m-2">1</span>
+                                <span class="m-2">Nguyễn Thị Diệu Hằng</span>
+                                <i class="fa-regular fa-clock"></i>
+                                <span class="m-2">20/03/2023 19:39:00 <i class="fa-sharp fa-solid fa-chess"></i></span>
+                            </div>
+                        </div>
+                        <div class="flex-fill">
+                            <div class="m-1 align-items-center" style="display:flex; flex-wrap:nowrap">
+                                <span class="text-white-50 p-1 m-2">2</span>
+                                <span class="m-2">Trần Quang Đại Nhân</span>
+                                <i class="fa-regular fa-clock"></i>
+                                <span class="m-2">20/09/2023 23:39:00</span>
+                            </div>
+                        </div>
+                        <div class="flex-fill">
+                            <div class="m-1 align-items-center" style="display:flex; flex-wrap:nowrap">
+                                <span class="text-white-50 p-1 m-2">3</span>
+                                <span class="m-2">Tiểu Lý Hiếu Cầu</span>
+                                <i class="fa-regular fa-clock"></i>
+                                <span class="m-2">30/12/2023 11:13:00</span>
+                            </div>
+                        </div>
+                        <div class="flex-fill">
+                            <div class="m-1 align-items-center" style="display:flex; flex-wrap:nowrap">
+                                <span class="text-white-50 p-1 m-2">4</span>
+                                <span class="m-2">Nguyễn Văn Quá</span>
+                                <i class="fa-regular fa-clock"></i>
+                                <span class="m-2">11/03/2024 07:20:00</span>
+                            </div>
+                        </div>
+                        <!--
+                        <div class="flex-fill">
+                            <div class="m-1 align-items-center" style="display:flex; flex-wrap:nowrap">
+                                <span class="text-white-50 p-1 m-2">6</span>
+                                <span class="m-2">Account 1</span>
+                                <i class="fa-regular fa-clock"></i>
+                            </div>
+                        </div>
+                        <div class="flex-fill">
+                            <div class="m-1 align-items-center" style="display:flex; flex-wrap:nowrap">
+                                <span class="text-white-50 p-1 m-2">7</span>
+                                <span class="m-2">Account 1</span>
+                                <i class="fa-regular fa-clock"></i>
+                            </div>
+                        </div>
+                        <div class="flex-fill">
+                            <div class="m-1 align-items-center" style="display:flex; flex-wrap:nowrap">
+                                <span class="text-white-50 p-1 m-2">8</span>
+                                <span class="m-2">Account 1</span>
+                                <i class="fa-regular fa-clock"></i>
+                            </div>
+                        </div>
+                        <div class="flex-fill">
+                            <div class="m-1 align-items-center" style="display:flex; flex-wrap:nowrap">
+                                <span class="text-white-50 p-1 m-2">9</span>
+                                <span class="m-2">Account 1</span>
+                                <i class="fa-regular fa-clock"></i>
+                            </div>
+                        </div>
+                        <div class="flex-fill">
+                            <div class="m-1 align-items-center" style="display:flex; flex-wrap:nowrap">
+                                <span class="text-white-50 p-1 m-2">10</span>
+                                <span class="m-2">Account 1</span>
+                                <i class="fa-regular fa-clock"></i>
+                            </div>
+                        </div>
+                        -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex mt-5 mb-5">
+        <div class="col flex-fill">
+            <div id="comment-1" class="m-lg-auto mb-3 px-4 py-3" style="width: 100%">
+                <div class="card bg-dark-card">
+                    <div class="card-body bg-dark-card">
+                        <form action="/" method="post">
+                            <div class="col-12 form-group" style="margin-left: 40px">
+                                <label for="markdown">Leave a Comment (Supports Markdown)</label>
+                                <textarea class="form-control" id="markdown" name="markdown" required></textarea>
+                                <button type="submit" class="btn btn-light">Comment</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="new" class="row">
+        <div class="col">
+            <div id="comment-1" class="m-lg-auto mb-3 px-4 py-3" style="width: 1100px">
+                <div class="card bg-dark-card">
+                    <div class="card-body bg-dark-card">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row d-flex">
+                                    <div class="col-12 d-flex">
+                                        <a class="mb-auto ml-2" href="/user/iadox">
+                                            <img height="75" width="75" src="https://avatar.ctflearn.com/eb3cdaaebe62c0b3adaa26f7707e67fb.png?set=set1&amp;size=75x75" class="navbar-avatar" alt="avatar">
+                                        </a>
+                                        <div class="row">
+                                            <div class="col">
+                                                <a style="color: white; " class="font-bolder font-primary ml-3 mb-auto" href="/user/iadox">iadox</a>
+                                                <p class="text-white-50 ml-3">2 years ago</p>
+                                            </div>
+                                        </div>
+                                        <div class="ml-auto font-weight-bold">
+                                            <a onclick="$('#edit-popular-5795').hide();$('#reply-popular-5795').show();$('#markdown5795').focus();" class="mr-4 float-right text-white-50 font-primary ctf-pointer">
+                                                <span>Reply<i class="fas fa-reply ml-2" aria-hidden="true"></i></span>
+                                            </a>
+                                            <a onclick="copyTextToClipboard('https://ctflearn.com/challenge/88/5795#comment-5795');notification('Copied to clipboard', 'success', 3000)" class="mr-4 float-right text-white-50 font-primary ctf-pointer">
+                                                <span>Share<i class="fas fa-link ml-2" aria-hidden="true"></i></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-11">
+                                        <div class="ml-2 my-auto">
+                                            <p>i couldn't solve it because im clueless in web, but i know Luke made that problem </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts
+    {
+    <script>
+        $(document).ready(function () {
+            $(".js-tongle-attendance").click(function (e) {
+                var button = $(e.target);
+                var flag = $("#flag").val();
+                $.post("/api/flag", { Id: button.attr("data-course-id"), flag : flag })
+                .done(function () {
+                    alert("Thử thách đã hoàn thành!");
+                    $(".js-tongle-attendance").removeClass("btn-default going").addClass("btn-info going3").text("Solved");
+                    $(".card-challege").removeClass("bg-dark-card").addClass("going2");
+                }).fail(function () {
+                    alert("Flag không chính xác!");
+                });
+        });
+    });
+    </script>
+}
+

@@ -1,0 +1,70 @@
+﻿@model IEnumerable<bigschool.Models.Course>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h1 class="mt-4">Tables</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"><a href="index.html">Course</a></li>
+    <li class="breadcrumb-item active">User</li>
+</ol>
+<div class="card mb-4">
+    <div class="card-body">
+        Các khóa học đã quá ngày khai giảng sẽ tự động ẩn khỏi table bên dưới. Hôm nay @ViewBag.Time.ToString("dd/MM/yyyy").
+    </div>
+</div>
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        DataTable Example
+    </div>
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>Tên khóa học</th>
+                    <th>Ngành</th>
+                    <th>Tên người hướng dẫn</th>
+                    <th>Ngày bắt đầu</th>
+                    <th>Học phí</th>
+                    <th>Địa điểm</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Tên khóa học</th>
+                    <th>Ngành</th>
+                    <th>Tên người hướng dẫn</th>
+                    <th>Ngày bắt đầu</th>
+                    <th>Số lượng sinh viên</th>
+                    <th>Địa điểm</th>
+                    <th>Hành động</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @for (int i = 0; i < Model.Count(); i++) 
+                { 
+                    <tr>
+                        <th>@Model.ElementAt(i).Name</th>
+                        <th>@Model.ElementAt(i).Category.Name</th>
+                        <th>@ViewBag.user[i].Text</th>
+                        <th>@Model.ElementAt(i).DateTime.ToString()</th>
+                        <th>@Model.ElementAt(i).Fee.ToString("C3")</th>
+                        <th>@Model.ElementAt(i).Place</th>
+                        <th>
+                            @Html.ActionLink("Delete", "Delete", new { id = Model.ElementAt(i).Id })
+                            @Html.ActionLink("Edit", "Edit", new { id = Model.ElementAt(i).Id })
+                        </th>
+                    </tr>
+                 }     
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
